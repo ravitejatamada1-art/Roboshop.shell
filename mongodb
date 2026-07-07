@@ -6,7 +6,7 @@ G="\3[32m"
 y="\e[33m"
 N="\e[0m"
 LOGS_FOLDER="/var/log/Roboshop-logs"
-SCRIPT_NAME=$MONGODB.LOG
+SCRIPT_NAME=$mongodb.log
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME"
 mkdir -p $LOGS_FOLDER
 echo "script started executing at : $(date)" | tee -a$LOG_FILE
