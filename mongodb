@@ -1,0 +1,39 @@
+#!/bin/bash
+
+USER_ID=$(id -u)
+R="\e[31m"
+G="\3[32m"
+y="\e[33m"
+N="\e[0m"
+LOGS_FOLDER="/var/log/Roboshop-logs"
+SCRIPT_NAME=$MONGODB.LOG
+LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME"
+mkdir -p $LOGS_FOLDER
+echo "script started executing at : $(date)" | tee -a$LOG_FILE
+if [ $USER_ID -ne 0 ]
+then
+echo -e "$R ERROR: please run the script with root access $N" | tee -a $LOG_FILE
+exit 1
+else echo "you are running with root access" | tee -a $LOG-FILE
+fi
+VALIDATE() {
+    if [ $1 -eq 0 ]
+    then
+    echo -e "$2 is ..$G SUCCESS $N" | tee -a $LOG_FILE
+    else
+    echo -e "$2 is ..$R FAILURE $N" | tee -a $LOG_FILE
+    exit 1
+    fi
+}
+cp mongodb.sh /etc/yum.repos.d/mongo.repo $>>LOG_FILE
+VALIDATE $? "copying mongodb Repo"
+dnf install mongodb -org -y &>>$LOG_FILE
+VALIDATE $? "installing mongodb server"
+systemctl enable mongodb &>>$LOG_FILE
+VALIDATE $? "enabling mongodb"
+systemctl start mongodb &>>$LOG_FILE
+VALIDATE $? "starting mongodb"
+sed -i 's/127.0.0.1/o.o.o.o/g' /etc/mongod.conf
+VALIDATE $? "editing mongodb config file"
+systemctl restart mongodb &>>$LOG_FILE
+VALIDATE $? "restarting mongodb"
