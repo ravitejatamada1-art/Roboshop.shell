@@ -1,4 +1,4 @@
-R="\e{31m"
+R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
@@ -13,9 +13,9 @@ VALIDATE()
 {
 if [ $1 -eq 0 ]
 then 
-echo -e  "$2 is $G "successful",$N"
+echo -e  "$2 is $Gsuccessful$N"
 else
-echo -e "$2 is $R "failure" $N"
+echo -e "$2 is $Rfailure$N"
 fi
 }
 cp mongodb.repo /etc/yum.repos.d/mongo.repo
