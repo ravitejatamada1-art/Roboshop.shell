@@ -15,7 +15,7 @@ echo "$2 is failure"
 fi
 }
 cp mongodb.repo /etc/yum.repos.d/mongo.repo
-Validate $? "copying the Repo"
+ VALIDATE $? "copying the Repo"
 dnf install mongodb-org -y 
 VALIDATE $? "Installing MongoDB"
 systemctl enable mongod 
