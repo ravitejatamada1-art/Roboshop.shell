@@ -6,7 +6,7 @@ USERID=$(id -u)
 FOLDER_NAME="/var/log/Roboshop-logs"
 SCRIPT_NAME=mongodb.log
 LOG_FILE="$FOLDER_NAME/$SCRIPT_NAME"
-makedir -p $FOLDER_NAME
+mkdir -p $FOLDER_NAME
 if [ $USERID -eq 0 ]
 then 
 echo "you are Running with Root User" |tee -a $LOG_FILE
