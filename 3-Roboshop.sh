@@ -13,9 +13,9 @@ VALIDATE()
 {
 if [ $1 -eq 0 ]
 then 
-echo -e  "$2 is $Gsuccessful$N"
+echo -e  "$2 is $G"successful"$N"
 else
-echo -e "$2 is $Rfailure$N"
+echo -e "$2 is $R"failure"$N"
 fi
 }
 cp mongodb.repo /etc/yum.repos.d/mongo.repo
