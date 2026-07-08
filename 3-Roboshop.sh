@@ -3,8 +3,7 @@ if [ $USERID -eq 0 ]
 then 
 echo "you are Running with Root User"
 else
-echo"Please run with Root User"
-exit 1
+echo "Please run with Root User"
 fi
 VALIDATE()
 {
