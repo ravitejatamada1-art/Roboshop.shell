@@ -19,13 +19,13 @@ echo -e "$2 is $R failure $N"
 fi
 }
 cp mongodb.repo /etc/yum.repos.d/mongo.repo
- VALIDATE $? $Y "copying the Repo" $N
+ VALIDATE $? $Y"copying the Repo"$N
 dnf install mongodb-org -y 
-VALIDATE $? $Y "Installing MongoDB" $N
+VALIDATE $? $Y"Installing MongoDB"$N
 systemctl enable mongod 
-VALIDATE $? $Y "enabling mongod" $N
+VALIDATE $? $Y"enabling mongod"$N
 systemctl start mongod 
-VALIDATE $? $Y "starting mongod" $N
+VALIDATE $? $Y"starting mongod"$N
 sed -i 's/127..0.0.1/0.0.0.0/g' /etc/mongod.conf
 systemctl restart mongod
-VALIDATE $? $Y "restarting mongodb" $N
+VALIDATE $? $Y"restarting mongodb"$N
