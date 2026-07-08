@@ -1,3 +1,7 @@
+R="\e{31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
 USERID=$(id -u)
 if [ $USERID -eq 0 ]
 then 
@@ -9,19 +13,19 @@ VALIDATE()
 {
 if [ $1 -eq 0 ]
 then 
-echo "$2 is successful"
+echo -e  "$2 is $G successful $N"
 else
-echo "$2 is failure"
+echo -e "$2 is $R failure $N"
 fi
 }
 cp mongodb.repo /etc/yum.repos.d/mongo.repo
- VALIDATE $? "copying the Repo"
+ VALIDATE $? $Y "copying the Repo" $N
 dnf install mongodb-org -y 
-VALIDATE $? "Installing MongoDB"
+VALIDATE $? $Y "Installing MongoDB" $N
 systemctl enable mongod 
-VALIDATE $? "enabling mongod"
+VALIDATE $? $Y "enabling mongod" $N
 systemctl start mongod 
-VALIDATE $? "starting mongod"
+VALIDATE $? $Y "starting mongod" $N
 sed -i 's/127..0.0.1/0.0.0.0/g' /etc/mongod.conf
 systemctl restart mongod
-VALIDATE $? "restarting mongodb"
+VALIDATE $? $Y "restarting mongodb" $N
