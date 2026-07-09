@@ -3,7 +3,10 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 USERID=$(id -u)
-LOG_FILE="/var/log/Roboshop-logs/mongodb.log"
+LOGS_FOLDER="/var/log/Roboshop-logs"
+SCRIPT_NAME="mongodb.log"
+LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME"
+mkdir -p $LOGS_FOLDER
 if [ $USERID -eq 0 ]
 then 
 echo "you are Running with Root User" |tee -a $LOG_FILE
