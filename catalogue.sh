@@ -28,9 +28,9 @@ VALIDATE $? $Y"INSTALLING node js"$N
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
 VALIDATE $? $Y"creating roboshop user"$N
 mkdir -p /app 
-VALIDATE &? $Y"creating app directory"$N
+VALIDATE $? $Y"creating app directory"$N
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
-VALIDATE &? $Y"downloading Zip file"$N
+VALIDATE $? $Y"downloading Zip file"$N
 cd /app 
 unzip /tmp/catalogue.zip
 VALIDATE $? $Y"extracting catalogue zip file"$N
@@ -52,4 +52,4 @@ cp mongodb.repo /etc/yum.repos.d/mongo.repo
 VALIDATE $? $Y"installing mongodb repository"$N
 dnf install mongodb-mongosh -y
 VALIDATE $? $Y"INSTALLING MONGODB client"$N
-mongosh --host 172.31.1.162 </app/db/master-data.js
+mongosh --host mongodb.Roboshop.bond </app/db/master-data.js
