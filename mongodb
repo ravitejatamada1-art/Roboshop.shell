@@ -2,7 +2,7 @@
 
 USER_ID=$(id -u)
 R="\e[31m"
-G="\3[32m"
+G="\e[32m"
 y="\e[33m"
 N="\e[0m"
 LOGS_FOLDER="/var/log/Roboshop-logs"
