@@ -21,37 +21,37 @@ echo -e  "$2 is $G"successful"$N" | tee -a $LOG_FILE
 else
 echo -e "$2 is $R"failure"$N" | tee -a $LOG_FILE
 fi
-}
-dnf module disable nodejs -y
-VALIDATE $? $Y"disabling the nodejs"$N
-dnf module enable nodejs:20 -y
-VALIDATE $? $Y"enabling nodejs"$N
-dnf install nodejs -y
-VALIDATE $? $Y"INSTALLING node js"$N
+} 
+dnf module disable nodejs -y  &>>$LOG_FILE
+VALIDATE $? $Y"disabling the nodejs"$N $LOG_FILE
+dnf module enable nodejs:20 -y &>>$LOG_FILE
+VALIDATE $? $Y"enabling nodejs"$N $LOG_FILE
+dnf install nodejs -y  &>>$LOG_FILE
+VALIDATE $? $Y"INSTALLING node js"$N $LOG_FILE
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
-VALIDATE $? $Y"creating roboshop user"$N
+VALIDATE $? $Y"creating roboshop user"$N $LOG_FILE
 mkdir -p /app 
-VALIDATE $? $Y"creating app directory"$N
+VALIDATE $? $Y"creating app directory"$N $LOG_FILE
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
-VALIDATE $? $Y"downloading Zip file"$N
+VALIDATE $? $Y"downloading Zip file"$N $LOG_FILE
 cd /app 
 unzip /tmp/catalogue.zip
-VALIDATE $? $Y"extracting catalogue zip file"$N
-npm install 
-VALIDATE $? $Y"installing npm dependencies"$N
+VALIDATE $? $Y"extracting catalogue zip file"$N $LOG_FILE
+npm install  &>>$LOG_FILE
+VALIDATE $? $Y"installing npm dependencies"$N $LOG_FILE
 [Unit]
 Description = Catalogue Service
 
 cp catalogue.service /etc/systemd/system/catalogue.service
-VALIDATE $? $Y"installing catalogue service"$N
-systemctl daemon-reload
-VALIDATE $? $Y"reloading systemd daemon"$N
-systemctl enable catalogue 
-VALIDATE $? $Y"ENABLING CATALOGUE SERVICE"$N
-systemctl start catalogue
-VALIDATE $? $Y"starting catalogue service"$N
+VALIDATE $? $Y"installing catalogue service"$N $LOG_FILE
+systemctl daemon-reload &>>$LOG_FILE
+VALIDATE $? $Y"reloading systemd daemon"$N $LOG_FILE
+systemctl enable catalogue  &>>$LOG_FILE
+VALIDATE $? $Y"ENABLING CATALOGUE SERVICE"$N $LOG_FILE
+systemctl start catalogue &>>$LOG_FILE
+VALIDATE $? $Y"starting catalogue service"$N $LOG_FILE
 cp mongodb.repo /etc/yum.repos.d/mongo.repo
-VALIDATE $? $Y"installing mongodb repository"$N
-dnf install mongodb-mongosh -y
-VALIDATE $? $Y"INSTALLING MONGODB client"$N
+VALIDATE $? $Y"installing mongodb repository"$N $LOG_FILE
+dnf install mongodb-mongosh -y &>>$LOG_FILE
+VALIDATE $? $Y"INSTALLING MONGODB client"$N $LOG_FILE
 mongosh --host mongodb.Roboshop.bond </app/db/master-data.js
