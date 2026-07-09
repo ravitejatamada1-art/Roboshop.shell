@@ -37,7 +37,6 @@ VALIDATE $? $Y"downloading Zip file"$N
 cd /app 
 unzip /tmp/catalogue.zip
 VALIDATE $? $Y"extracting catalogue zip file"$N
-cd /app 
 npm install 
 VALIDATE $? $Y"installing npm dependencies"$N
 [Unit]
