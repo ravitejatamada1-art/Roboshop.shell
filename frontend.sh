@@ -39,6 +39,6 @@ VALIDATE $? $Y"downloading frontend zip file"$N
 cd /usr/share/nginx/html 
 unzip /tmp/frontend.zip
 VALIDATE $? $Y"extracting frontend zip file"$N
-cp frontend.conf /etc/nginx/nginx.conf
+cp nginx.conf /etc/nginx/nginx.conf
 systemctl restart nginx 
 VALIDATE $? $Y"restarting nginx service"$N
