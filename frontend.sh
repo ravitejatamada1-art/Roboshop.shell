@@ -31,7 +31,7 @@ dnf install nginx -y &>>$LOG_FILE
 VALIDATE $? $Y"installing nginx"$N $LOG_FILE
 systemctl enable nginx  &>>$LOG_FILE
 VALIDATE $? $Y"ENABLING NGINX SERVICE"$N
-systemctl start nginx  &>>$LOG_FILE
+systemctl start nginx  
 VALIDATE $? $Y"starting nginx service"$N $LOG_FILE
 rm -rf /usr/share/nginx/html/*  &>>$LOG_FILE
 VALIDATE $? $Y"clearing nginx html directory"$N $LOG_FILE
@@ -43,4 +43,4 @@ VALIDATE $? $Y"extracting frontend zip file"$N $LOG_FILE
 rm -rf /etc/nginx/nginx.conf &>>$LOG_FILE
 cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf &>>$LOG_FILE
 systemctl restart nginx &>>$LOG_FILE
-VALIDATE $? $Y"restarting nginx service"$N $LOG_FILE 
+VALIDATE $? $Y"restarting nginx service"
