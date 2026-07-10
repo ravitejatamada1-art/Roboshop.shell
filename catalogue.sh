@@ -7,6 +7,7 @@ LOGS_FOLDER="/var/log/Roboshop-logs"
 SCRIPT_NAME="mongodb.log"
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME"
 mkdir -p $LOGS_FOLDER
+SCRIPT_DIR=$PWD
 if [ $USERID -eq 0 ]
 then 
 echo "you are Running with Root User" |tee -a $LOG_FILE
@@ -39,10 +40,8 @@ unzip /tmp/catalogue.zip
 VALIDATE $? $Y"extracting catalogue zip file"$N $LOG_FILE
 npm install  &>>$LOG_FILE
 VALIDATE $? $Y"installing npm dependencies"$N $LOG_FILE
-[Unit]
-Description = Catalogue Service
-
-cp catalogue.service /etc/systemd/system/catalogue.service
+rm -rf /etc/systemd/system/catalogue.service
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service
 VALIDATE $? $Y"installing catalogue service"$N $LOG_FILE
 systemctl daemon-reload &>>$LOG_FILE
 VALIDATE $? $Y"reloading systemd daemon"$N $LOG_FILE
