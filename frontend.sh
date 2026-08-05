@@ -42,5 +42,5 @@ unzip /tmp/frontend.zip &>>$LOG_FILE
 VALIDATE $? $Y"extracting frontend zip file"$N $LOG_FILE
 rm -rf /etc/nginx/nginx.conf &>>$LOG_FILE
 cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf &>>$LOG_FILE
-systemctl restart nginx &>>$LOG_FILE
+systemctl restart nginx 
 VALIDATE $? $Y"restarting nginx service"
