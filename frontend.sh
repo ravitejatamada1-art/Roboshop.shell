@@ -22,25 +22,25 @@ echo -e  "$2 is $G"successful"$N" | tee -a $LOG_FILE
 else
 echo -e "$2 is $R"failure"$N" | tee -a $LOG_FILE
 fi
- }
-dnf module disable nginx -y &>>$LOG_FILE
+}
+dnf module disable nginx -y 
 VALIDATE $? $Y"disabling the nginx"$N $LOG_FILE
-dnf module enable nginx:1.24 -y &>>$LOG_FILE
+dnf module enable nginx:1.24 -y 
 VALIDATE $? $Y"enabling nginx"$N $LOG_FILE
-dnf install nginx -y &>>$LOG_FILE
+dnf install nginx -y 
 VALIDATE $? $Y"installing nginx"$N $LOG_FILE
-systemctl enable nginx  &>>$LOG_FILE
+systemctl enable nginx  
 VALIDATE $? $Y"ENABLING NGINX SERVICE"$N
 systemctl start nginx  
 VALIDATE $? $Y"starting nginx service"$N $LOG_FILE
-rm -rf /usr/share/nginx/html/*  &>>$LOG_FILE
+rm -rf /usr/share/nginx/html/*  
 VALIDATE $? $Y"clearing nginx html directory"$N $LOG_FILE
-curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>>$LOG_FILE
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip 
 VALIDATE $? $Y"downloading frontend zip file"$N $LOG_FILE
-cd /usr/share/nginx/html &>>$LOG_FILE
-unzip /tmp/frontend.zip &>>$LOG_FILE
+cd /usr/share/nginx/html 
+unzip /tmp/frontend.zip 
 VALIDATE $? $Y"extracting frontend zip file"$N $LOG_FILE
-rm -rf /etc/nginx/nginx.conf &>>$LOG_FILE
-cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf &>>$LOG_FILE
+rm -rf /etc/nginx/nginx.conf 
+cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf 
 systemctl restart nginx 
 VALIDATE $? $Y"restarting nginx service"
