@@ -15,14 +15,14 @@ else
 echo "Please run with Root User" |tee -a $LOG_FILE
 fi
 VALIDATE()
-{
+ {
 if [ $1 -eq 0 ]
 then 
 echo -e  "$2 is $G"successful"$N" | tee -a $LOG_FILE
 else
 echo -e "$2 is $R"failure"$N" | tee -a $LOG_FILE
 fi
-}
+ }
 dnf module disable nginx -y &>>$LOG_FILE
 VALIDATE $? $Y"disabling the nginx"$N $LOG_FILE
 dnf module enable nginx:1.24 -y &>>$LOG_FILE
