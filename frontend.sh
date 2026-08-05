@@ -7,7 +7,6 @@ LOGS_FOLDER="/var/log/Roboshop-logs"
 SCRIPT_NAME="mongodb.log"
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME"
 mkdir -p $LOGS_FOLDER
-SCRIPT_DIR=$PWD
 if [ $USERID -eq 0 ]
 then 
 echo "you are Running with Root User" |tee -a $LOG_FILE
@@ -41,6 +40,6 @@ cd /usr/share/nginx/html
 unzip /tmp/frontend.zip 
 VALIDATE $? $Y"extracting frontend zip file"$N $LOG_FILE
 rm -rf /etc/nginx/nginx.conf 
-cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf 
+cp nginx.conf /etc/nginx/nginx.conf 
 systemctl restart nginx 
 VALIDATE $? $Y"restarting nginx service"
