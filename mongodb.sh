@@ -21,7 +21,7 @@ echo -e  "$2 is $G"successful"$N" | tee -a $LOG_FILE
 else
 echo -e "$2 is $R"failure"$N" | tee -a $LOG_FILE
 fi
-}
+ }
 cp mongodb.repo /etc/yum.repos.d/mongo.repo
  VALIDATE $? $Y"copying the Repo"$N
 dnf install mongodb-org -y &>>$LOG_FILE
