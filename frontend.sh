@@ -5,6 +5,7 @@ N="\e[0m"
 USERID=$(id -u)
 LOGS_FOLDER="/var/log/Roboshop-logs"
 SCRIPT_NAME="mongodb.log"
+SCRIPT_DIR=$PWD
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME"
 mkdir -p $LOGS_FOLDER
 if [ $USERID -eq 0 ]
@@ -40,6 +41,6 @@ cd /usr/share/nginx/html
 unzip /tmp/frontend.zip 
 VALIDATE $? $Y"extracting frontend zip file"$N $LOG_FILE
 rm -rf /etc/nginx/nginx.conf 
-cp nginx.conf /etc/nginx/nginx.conf 
+cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.config 
 systemctl restart nginx 
 VALIDATE $? $Y"restarting nginx service"
