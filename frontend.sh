@@ -3,8 +3,8 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 USERID=$(id -u)
-LOGS_FOLDER="/var/log/Roboshop-logs"
-SCRIPT_NAME="mongodb.log"
+LOGS_FOLDER="/var/log/ravi.log"
+SCRIPT_NAME="frontend.sh"
 SCRIPT_DIR=$PWD
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME"
 mkdir -p $LOGS_FOLDER
