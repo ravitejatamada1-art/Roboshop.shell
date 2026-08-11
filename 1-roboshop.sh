@@ -2,7 +2,7 @@
 AMI_ID="ami-0220d79f3f480ecf5"
 SG_ID="sg-026381a5a2005e8e7"
 INSTANCES=("MONGODB" "REDIS" "MYSQL" "RABBITNQ" "CATALOGUE" "USER" "CART" "SHIPPING" "PAYMENT" "DISPATCH" "FRONTEND")
-ZONE_ID=Z08964191DFKFWEA2YRY0
+ZONE_ID=Z01655173S50R2HRUVPRU
 DOMAIN_NAME="roboshop.bond"
 for instance in ${INSTANCES[@]}
 do 
@@ -14,4 +14,21 @@ do
       IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
      fi
      echo "$instance IP Address:$IP"
- done
+
+     aws route53 change-resoure-record-sets \
+     --hosted-zone-id $ZONE_ID \
+     --change-batch '
+     {
+     "comment":"creating or updating a record set for cognito endpoint"
+     ,"changes": [{
+     "ACTION"                 :   "UPSERT"
+     ,"ResourceRecordSet"     :   {
+     "NAME"                   :   "A"
+     "TTL"                    :    1
+     ,"ResourceRecords"       :   [{
+     "VALUE"                  :   "'$IP'"
+     }]
+     }
+     }]
+     }'
+  done
