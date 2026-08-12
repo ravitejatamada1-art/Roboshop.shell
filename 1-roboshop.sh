@@ -23,10 +23,11 @@ do
      ,"changes": [{
      "ACTION"                 :   "UPSERT"
      ,"ResourceRecordSet"     :   {
-     "NAME"                   :   "$instance.roboshop.bond"
+     "name"                   :   "$instance.roboshop.bond"
+     "Type"                   :   "A"
      "TTL"                    :    1
      ,"ResourceRecords"       :   [{
-     "VALUE"                  :   "'$IP'"
+     "value"                  :   "'$IP'"
      }]
      }
      }]
