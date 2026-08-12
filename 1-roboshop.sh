@@ -19,11 +19,11 @@ do
      --hosted-zone-id $ZONE_ID \
      --change-batch '
      {
-     "comment":"creating or updating a record set for cognito endpoint"
-     ,"changes": [{
-     "ACTION"                 :   "UPSERT"
+     "Comment":"creating or updating a record set for cognito endpoint"
+     ,"Changes": [{
+     "Action"                 :   "UPSERT"
      ,"ResourceRecordSet"     :   {
-     "name"                   :   "$instance.roboshop.bond"
+     "Name"                   :   "$instance.roboshop.bond"
      "Type"                   :   "A"
      "TTL"                    :    1
      ,"ResourceRecords"       :   [{
