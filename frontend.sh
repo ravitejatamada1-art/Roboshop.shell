@@ -10,36 +10,36 @@ LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME"
 mkdir -p $LOGS_FOLDER
 if [ $USERID -eq 0 ]
 then 
-echo "you are Running with Root User" |tee -a $LOG_FILE
+echo "you are Running with Root User" |tee -a 
 else
-echo "Please run with Root User" |tee -a $LOG_FILE
+echo "Please run with Root User" |tee -a 
 fi
 VALIDATE()
  {
 if [ $1 -eq 0 ]
 then 
-echo -e  "$2 is $G"successful"$N" | tee -a $LOG_FILE
+echo -e  "$2 is $G"successful"$N" | tee -a
 else
-echo -e "$2 is $R"failure"$N" | tee -a $LOG_FILE
+echo -e "$2 is $R"failure"$N" | tee -a 
 fi
 }
 dnf module disable nginx -y 
-VALIDATE $? $Y"disabling the nginx"$N $LOG_FILE
+VALIDATE $? $Y"disabling the nginx"$N 
 dnf module enable nginx:1.24 -y 
-VALIDATE $? $Y"enabling nginx"$N $LOG_FILE
+VALIDATE $? $Y"enabling nginx"$N 
 dnf install nginx -y 
-VALIDATE $? $Y"installing nginx"$N $LOG_FILE
+VALIDATE $? $Y"installing nginx"$N 
 systemctl enable nginx  
 VALIDATE $? $Y"ENABLING NGINX SERVICE"$N
 systemctl start nginx  
-VALIDATE $? $Y"starting nginx service"$N $LOG_FILE
+VALIDATE $? $Y"starting nginx service"$N 
 rm -rf /usr/share/nginx/html/*  
-VALIDATE $? $Y"clearing nginx html directory"$N $LOG_FILE
+VALIDATE $? $Y"clearing nginx html directory"$N 
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip 
-VALIDATE $? $Y"downloading frontend zip file"$N $LOG_FILE
+VALIDATE $? $Y"downloading frontend zip file"$N 
 cd /usr/share/nginx/html 
 unzip /tmp/frontend.zip 
-VALIDATE $? $Y"extracting frontend zip file"$N $LOG_FILE
+VALIDATE $? $Y"extracting frontend zip file"$N 
 rm -rf /etc/nginx/nginx.conf 
 cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.config 
 systemctl restart nginx 
