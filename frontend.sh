@@ -41,6 +41,6 @@ cd /usr/share/nginx/html
 unzip /tmp/frontend.zip 
 VALIDATE $? $Y"extracting frontend zip file"$N 
 rm -rf /etc/nginx/nginx.conf 
-cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.config 
+cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf
 systemctl restart nginx 
 VALIDATE $? $Y"restarting nginx service"
